@@ -3,51 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/styles.css">
-    <title>Predicción con Modeloooo</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <title>Encuentra Personas Similares</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Predicción con Modelo</h1>
-        <form id="predict-form" enctype="multipart/form-data">
-            <input type="file" id="file" name="file" accept="image/*">
-            <img id="preview" src="#" alt="Vista previa de la imagen" style="display: none; max-width: 300px; margin-top: 10px; border: 2px solid #ccc; border-radius: 10px;">
-            <button type="submit">Predecir</button>
-        </form>
-        <div id="result"></div>
-    </div>
-    <script src="/static/scripts.js"></script>
-    <script>
-        document.getElementById('file').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const preview = document.getElementById('preview');
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        document.getElementById('predict-form').addEventListener('submit', async function(event) {
-            event.preventDefault();
-            const fileInput = document.getElementById('file');
-            const formData = new FormData();
-            formData.append('file', fileInput.files[0]);
-
-            const response = await fetch('/predict', {
-                method: 'POST',
-                body: formData,
+    <div class="main-content">
+        <div class="container">
+            <h1>Encuentra Personas Similares</h1>
+            <form id="predict-form" enctype="multipart/form-data">
+                <input type="file" id="file" name="file" accept="image/*">
+                <img id="preview" src="#" alt="Vista previa de la imagen" style="display: none; max-width: 300px; margin-top: 10px; border: 2px solid #ccc; border-radius: 10px;">
+                <button type="submit">Predecir</button>
+            </form>
+            <div id="result"></div>
+        </div>
+        <div class="image-grid">
+            <div class="image-item">
+                <img src="/img/000014.jpg" alt="Image 1" class="small-image">
+                <p>GRACE BRITANY ASHLY SALAS ROJAS<br>Hecho ocurrido el: 23/06/2024 04:00:00 a.m.</p>
+            </div>
+            <div class="image-item">
+                <img src="/img/000015.jpg" alt="Image 1" class="small-image">
+                <p>GRACE BRITANY ASHLY SALAS ROJAS<br>Hecho ocurrido el: 23/06/2024 04:00:00 a.m.</p>
+            </div>
+            <div class="image-item">
+                <img src="/img/000016.jpg" alt="Image 1" class="small-image">
+                <p>GRACE BRITANY ASHLY SALAS ROJAS<br>Hecho ocurrido el: 23/06/2024 04:00:00 a.m.</p>
+            </div>
+            <div class="image-item">
+                <img src="/img/000017.jpg" alt="Image 1" class="small-image">
+                <p>GRACE BRITANY ASHLY SALAS ROJAS<br>Hecho ocurrido el: 23/06/2024 04:00:00 a.m.</p>
+            </div>
+        </div>
+    
+        <script src="/static/scripts.js"></script>
+        <script>
+            document.getElementById('file').addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const preview = document.getElementById('preview');
+                        preview.src = e.target.result;
+                        preview.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                }
             });
-            const data = await response.json();
-            if (data.error) {
-                document.getElementById('result').innerText = `Error: ${data.error}`;
-            } else {
-                document.getElementById('result').innerText = `Predicción: ${data.prediction}`;
-            }
-        });
-    </script>
+    
+            document.getElementById('predict-form').addEventListener('submit', async function(event) {
+                event.preventDefault();
+                const fileInput = document.getElementById('file');
+                const formData = new FormData();
+                formData.append('file', fileInput.files[0]);
+    
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    body: formData,
+                });
+                const data = await response.json();
+                if (data.error) {
+                    document.getElementById('result').innerText = `Error: ${data.error}`;
+                } else {
+                    document.getElementById('result').innerText = `Predicción: ${data.prediction}`;
+                }
+            });
+        </script>
+    
+    </div>
 </body>
 </html>
