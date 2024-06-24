@@ -7,7 +7,7 @@ import io
 app = Flask(__name__)
 
 # Carga el modelo
-model = tf.keras.models.load_model('model/model800.h5')
+model = tf.keras.models.load_model('Model/ModeloEntrenado.h5')
 
 def preprocess_image(image):
     # Ajusta el tamaño de la imagen y otros preprocesamientos necesarios
@@ -18,20 +18,29 @@ def preprocess_image(image):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('Index.html')
 
 @app.route('/predict', methods=['POST'])
 def predict():
     if 'file' not in request.files:
-        return jsonify({'error': 'No file part'})
+        return jsonify({'error': 'No file part'}), 400
     file = request.files['file']
     if file.filename == '':
-        return jsonify({'error': 'No selected file'})
-    if file:
-        img = Image.open(io.BytesIO(file.read()))
-        img = preprocess_image(img)
-        prediction = model.predict(img)
-        return jsonify({'prediction': prediction.tolist()})
+        return jsonify({'error': 'No selected file'}), 400
+    if file and allowed_file(file.filename):
+        try:
+            img = Image.open(io.BytesIO(file.read()))
+            img = preprocess_image(img)
+            prediction = model.predict(img)
+            return jsonify({'prediction': prediction.tolist()})
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
+    else:
+        return jsonify({'error': 'File type not allowed'}), 400
+
+def allowed_file(filename):
+    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 if __name__ == '__main__':
     app.run(debug=True)

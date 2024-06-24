@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-image: url('/img/fondo.jpg'); /* Ruta a tu imagen de fondo */
+    background-image: url('../img/fondo.jpg'); /* Ruta a tu imagen de fondo */
     background-size: cover;
     background-position: center;
     margin: 0;
@@ -108,7 +108,130 @@ button[type="submit"]:hover {
 }
 .image-grid img {
     width: 100%;
-    border-radius: 10px;
+    border-radius: 10px;body {
+        font-family: Arial, sans-serif;
+        background-image: url('/img/fondo.jpg'); /* Ruta a tu imagen de fondo */
+        background-size: cover;
+        background-position: center;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+    
+    body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.7); /* Capa blanca semi-transparente */
+        z-index: 1;
+    }
+    
+    .main-content {
+        position: relative;
+        z-index: 2;
+        width: 80%;
+        max-width: 1200px;
+        background-color: #ffffff; /* Fondo blanco */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        min-height: 94vh; /* Asegura que el contenedor principal ocupe casi toda la altura disponible */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    .container {
+        width: 90%; /* Ajusta el ancho según sea necesario */
+        max-width: 1200px; /* Ajusta el tamaño máximo según sea necesario */
+        padding: 20px;
+        background-color: #000000; /* Fondo negro */
+        color: #ffffff; /* Texto blanco para mejor legibilidad */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        text-align: center;
+        margin: 0 auto; /* Centra el contenedor horizontalmente */
+    }
+    .container h1 {
+        font-size: 2em;
+        margin-bottom: 20px;
+        color: #fff; /* Cambia el color a blanco */
+    }
+    
+    
+    h1 {
+        font-size: 2em;
+        margin-bottom: 20px;
+        color: #333;
+    }
+    
+    input[type="file"],
+    button[type="submit"] {
+        display: inline-block;
+        margin: 10px;
+        padding: 10px 20px;
+        font-size: 1em;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    input[type="file"]:hover,
+    button[type="submit"]:hover {
+        background-color: #ddd;
+    }
+    
+    #preview {
+        display: none;
+        max-width: 300px;
+        margin-top: 10px;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+    }
+    .image-grid {
+        display: flex;
+        justify-content: center;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        width: 90%; /* Ajusta el ancho según sea necesario */
+        margin-top: 20px; /* Añade espacio arriba */
+        background: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente para el contenedor */
+        padding: 20px;
+        border-radius: 10px;
+    }
+    .image-item {
+        text-align: center;
+        padding: 10px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .image-grid img {
+        width: 100%;
+        border-radius: 10px;
+        border: 2px solid #ccc;
+    }
+    .small-image {
+        width: 100%;
+        max-width: 150px; /* Tamaño máximo de la imagen */
+        border-radius: 10px;
+        border: 2px solid #ccc;
+    }
+    .image-item p {
+        margin: 10px 0 0 0;
+        font-size: 0.9em;
+        color: #333;
+    }
     border: 2px solid #ccc;
 }
 .small-image {
